@@ -11,7 +11,7 @@ function NavBar() {
         else navBarAnimations.open()
     }
     return (
-        <nav id='navbar-wr' className='flex relative justify-between items-center p-4 bg-black'>
+        <nav id='navbar-wr' className='flex sticky top-0 z-10 justify-between items-center p-4 bg-black'>
             <div className='logoText text-xl flex font-bold '>
                 <span className=''>NFT</span>
                 <small className=' self-end'>icks</small>
