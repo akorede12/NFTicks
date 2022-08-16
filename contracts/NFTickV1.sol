@@ -33,7 +33,7 @@ contract NFTick is ERC1155, ERC1155Supply, ERC1155Holder  {
     // struct to store info of all nfticks with the same tokenName 
     struct nftickCollection {
         uint256 totalTokens;
-        address payable owner;
+        address payable owner; // This should be deleted, owner is the creator 
         address payable creator;
         bytes tokenName;
         bytes data;
@@ -206,27 +206,39 @@ contract NFTick is ERC1155, ERC1155Supply, ERC1155Holder  {
 
     // function to buy nfticks 
     function buyNftick(
-        uint256 tokenId, 
+        uint256 _tokenId, 
         bytes memory _tokenName
         ) public payable returns(bool approved)
     {
     // get the price of each NFTick 
-    uint256 Price = allNfticks[_tokenName][tokenId].currentPrice; 
+    uint256 Price = allNfticks[_tokenName][_tokenId].currentPrice; 
     // get the data of each nftick 
-    bytes memory Data = allNfticks[_tokenName][tokenId].data;
+    bytes memory Data = allNfticks[_tokenName][_tokenId].data;
 
     // make sure the payment is equal to the price of the nftick 
     require( msg.value >= Price, "Not enough funds for transaction");
 
-    // update owner of the nftick 
-    allNfticks[_tokenName][tokenId].owner = payable(msg.sender);
+    // update owner of the nftick  
+    allNfticks[_tokenName][_tokenId].owner = payable(msg.sender); 
+
+    // update AllNfticksCreated mapping 
+    /*I think this is going to be expensive to excecute, Sadly I can't think of an altenative at the moment, due to hackathon time constraints
+    for now I'll leave it in just to get things to work 
+    for(uint i = 0; i < totalNoOfNfticks ; i++) {
+        if(AllNfticksCreated[i].tokenName = _tokenName) {
+            if(allNfticks[_tokenName][_tokenId].tokenId == _tokenId) {
+                AllNfticksCreated[i].owner == msg.sender;
+            }    
+        }     
+    }
+    */
 
     //transfer owner ship of nfticks to the marketplace 
-    _safeTransferFrom(MarketAddress, msg.sender, tokenId, 1, Data);
+    _safeTransferFrom(MarketAddress, msg.sender, _tokenId, 1, Data);
     // operator, from, to, id, value
-    emit TransferSingle(MarketAddress, MarketAddress, msg.sender, tokenId, 1);
+    emit TransferSingle(MarketAddress, MarketAddress, msg.sender, _tokenId, 1);
     // operator, from, id, value, data 
-    onERC1155Received( MarketAddress, MarketAddress, tokenId, 1, Data);
+    onERC1155Received( MarketAddress, MarketAddress, _tokenId, 1, Data);
 
     return true;
     }
@@ -282,7 +294,7 @@ contract NFTick is ERC1155, ERC1155Supply, ERC1155Holder  {
         // loop to get all the events created by function caller and store them in collection array 
         for(uint i = 0; i < totalNoOfEvents ; i++){
             if(nftickCollectionToCreator[Creator].creator == msg.sender){
-            uint currentId = i + 1;
+            uint currentId = i;
             // reference current collection
             nftickCollection storage currentCollection = AllEventsCreated[currentId];
             // store collection in the array
@@ -304,7 +316,7 @@ contract NFTick is ERC1155, ERC1155Supply, ERC1155Holder  {
         nftickCollection[] memory collection = new nftickCollection[](totalNoOfEvents);
         // loop to get all the events created and store them in collection array 
         for(uint i = 0; i < totalNoOfEvents ; i++){
-            uint currentId = i + 1;
+            uint currentId = i;
             // reference current collection
             nftickCollection storage currentCollection = AllEventsCreated[currentId];
             // store collection in the array
@@ -339,6 +351,42 @@ contract NFTick is ERC1155, ERC1155Supply, ERC1155Holder  {
         return nftTicks; 
     }
 
+/*    // function to fetch all nfticks owned by the function caller 
+    function fetchAllMyNfticks() public view returns(nftick[] memory) {
+        
+        // param to store count of all nfticks 
+        uint nftCount = 0;
+
+        // variable to store the current index of nfticks in Nfticks array 
+        uint currentIndex = 0;
+
+        // loop to get the count of all nfticks owned by function caller 
+        for(uint i = 0; i < totalNoOfNfticks ; i++) {
+           if(AllNfticksCreated[i].owner == msg.sender) {
+               nftCount += 1;
+           }     
+        }
+        // a struck array to store all nfticks that belong to the function caller      
+        nftick[] memory Nfticks = new nftick[](nftCount);
+
+        // loop to get all the nftTicks owned by function caller and store them in the nftTicks array 
+        for(uint i = 0; i < totalNoOfNfticks ; i++){
+        // allNfticks[_tokenName][tokenId].owner = payable(msg.sender);
+        // AllNfticksCreated[i].owner == msg.sender
+            if(AllNfticksCreated[i].owner == msg.sender) {
+            uint currentId = i;
+            // reference current collection
+            nftick storage currentNftick = AllNfticksCreated[currentId];
+            // store nftick in Nfticks array
+            Nfticks[currentIndex] = currentNftick;
+            // increment item index
+            currentIndex += 1;
+            }
+        }
+        return Nfticks; 
+    }
+
+*/
     // function to fetch all nfticks owned by the function caller 
     function fetchAllMyNfticks() public view returns(nftick[] memory) {
         
@@ -360,7 +408,7 @@ contract NFTick is ERC1155, ERC1155Supply, ERC1155Holder  {
         // loop to get all the nftTicks owned by function caller and store them in the nftTicks array 
         for(uint i = 0; i < totalNoOfNfticks ; i++){
             if(AllNfticksCreated[i].owner == msg.sender) {
-            uint currentId = i + 1;
+            uint currentId = i;
             // reference current collection
             nftick storage currentNftick = AllNfticksCreated[currentId];
             // store nftick in Nfticks array
