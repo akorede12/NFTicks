@@ -5,14 +5,19 @@
 // will compile your contracts, add the Hardhat Runtime Environment's members to the
 // global scope, and execute the script.
 const hre = require("hardhat");
+const fs = require('fs');
+
 
 async function main() {
-  const contract = await getContractFactory("NFTick");
+  const contract = await hre.ethers.getContractFactory("NFTick");
   const nftickContract = await contract.deploy();
-
   await nftickContract.deployed();
 
-  console.log("NFTick contract address:", lock.address);
+  console.log("NFTick contract address:", nftickContract.address);
+
+  fs.writeFileSync('./config.js', `
+  export const marketAddress = "${nftickContract.address}"
+  `)
 }
 
 // We recommend this pattern to be able to use async/await everywhere
