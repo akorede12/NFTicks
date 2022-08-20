@@ -2,31 +2,30 @@ import React from 'react'
 import { ethers } from 'ethers'
 import Web3Modal from 'web3Modal'
 
+// import nftick contract address 
 import {
     contractAddress
-} from '..../config' // to be edited 
+} from '../../utils/config'
 
 // import smart contract abi 
-import NFTMarket from '../utils/NFTMarket.json' // to be edited 
+import NFTick from '../../utils/NFTick.json'
 
 function resellNftick( tokenName, tokenId, newPrice ) {
-    // bytes memory _tokenName,
-    // uint256 tokenId,
-    // uint256 newPrice
+
     const web3Modal = new Web3Modal()
     const connection = await web3Modal.connect()
     const provider = new ethers.providers.Web3Provider(connection)
     const signer = provider.getSigner()
 
-    const marketContract = new ethers.Contract(marketAddress, NFTMarket.abi, signer);
+    const nftickContract = new ethers.Contract(contractAddress, NFTick.abi, signer);
 
-    const tokenName = 
+    const Name = ethers.utils.formatBytes32String(tokenName);
 
-    const tokenId = 
+    const Id = ethers.utils.parseUnits(tokenId);
 
-    const newPrice = ethers.utils.parseUnits(newPrice. 'ether') 
+    const Price = ethers.utils.parseUnits(newPrice. 'ether') 
 
-    const ResellNftick = await marketContract.relistNftick(); 
+    const ResellNftick = await nftickContract.relistNftick( Name, Id, Price); 
 
 }
 

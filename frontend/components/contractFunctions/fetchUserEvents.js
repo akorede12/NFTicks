@@ -2,12 +2,14 @@ import React from 'react'
 import { ethers } from 'ethers'
 import Web3Modal from 'web3Modal'
 
+
+// import nftick contract address 
 import {
     contractAddress
-} from '..../config' // to be edited 
+} from '../../utils/config'
 
 // import smart contract abi 
-import NFTMarket from '../utils/NFTMarket.json' // to be edited 
+import NFTick from '../../utils/NFTick.json'
 
 function fetchUserEvents() { 
 
@@ -16,9 +18,9 @@ function fetchUserEvents() {
     const provider = new ethers.providers.Web3Provider(connection)
     const signer = provider.getSigner()
 
-    const marketContract = new ethers.Contract(marketAddress, NFTMarket.abi, signer)
+    const nftickContract = new ethers.Contract(contractAddress, NFTick.abi, signer)
 
-    let allUserNfticks = await marketContract.fetchAllMyEvents()
+    let allUserNfticks = await nftickContract.fetchAllMyEvents()
 
 }
 

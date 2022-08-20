@@ -8,13 +8,13 @@ import Web3Modal from 'web3modal'
 
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
-// import contraact address 
+// import nftick contract address 
 import {
     contractAddress
-} from '..../config' // to be edited 
+} from '../../utils/config'
 
 // import smart contract abi 
-import NFTMarket from '../utils/NFTMarket.json' // to be edited 
+import NFTMarket from '../../utils/NFTick.json'
 
 // create Nftick event 
 export default function createEvent () {

@@ -16,7 +16,7 @@ async function main() {
   console.log("NFTick contract address:", nftickContract.address);
 
   fs.writeFileSync('./config.js', `
-  export const marketAddress = "${nftickContract.address}"
+  export const contractAddress = "${nftickContract.address}"
   `)
 }
 

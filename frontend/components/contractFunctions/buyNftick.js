@@ -10,17 +10,23 @@ import {
 // import smart contract abi 
 import NFTick from '../../utils/NFTick.json'
 
-function fetchAllevents() { 
+function buyNftick( tokenId, tokenName ) {
 
     const web3Modal = new Web3Modal()
     const connection = await web3Modal.connect()
     const provider = new ethers.providers.Web3Provider(connection)
     const signer = provider.getSigner()
 
-    const nftickContract = new ethers.Contract(contractAddress, NFTick.abi, signer)
+    const nftickContract = new ethers.Contract(contractAddress, NFTick.abi, signer);
 
-    let allEvents = await nftickContract.fetchAllEventsCreated() 
+    const Name = ethers.utils.formatBytes32String(tokenName);
+
+    const Id = ethers.utils.parseUnits(tokenId);
+
+    // const Price = ethers.utils.parseUnits( Price. 'ether');
+
+    const ResellNftick = await nftickContract.buyNftick( Id, Name, { value: Price }); 
 
 }
 
-export default fetchAllevents()
+export default buyNftick()
