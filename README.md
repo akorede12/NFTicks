@@ -33,7 +33,9 @@ Easily verify ownership of each ticket created.
 NFTick.io is a project submission for polygon BUIDL Hackathon 
 
 # SPONSOR Technology
-POLYGON: for fast and efficient platform transactions
+POLYGON (mumbai testnet): for fast and efficient platform transactions
 IPFS: for NFTick data storage 
-CHAINLINK: for smart contract oracle 
-AWS: for backend 
+AWS: for App deployment
+
+smart contract address: 0x6D0E69f33364E60c2459576d57195dBD9acE7aD5
+polygonscan link: https://mumbai.polygonscan.com/address/0x6D0E69f33364E60c2459576d57195dBD9acE7aD5
