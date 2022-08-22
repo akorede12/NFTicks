@@ -26,7 +26,7 @@ export default function Home() {
                 <p className='text-lg text-center'>NFTick.io is an events marketplace. built using erc1155 token standards.
                     After connecting your crypto wallet, users can purchase NFTicks - NFT Tickets - to their favourite events. Whether a physical or virtual event nfticks grants holders easy and hassle free access to the events.
                     built using erc1155 token standards, nfticks provide a way to easily verify that a user actually owners an nftick reducing bad actors that may try to out smart the conventional paper ticket.
-                    Polygon POS allows for fast and inexpensive transaction on the blockchain, without which NFTick.io won't be able to function.
+                    Polygon POS allows for fast and inexpensive transaction on the blockchain, without which NFTick.io will not be able to function.
                 </p>
                 <h2 className='text-lg text-center font-bold'>For Event Creators</h2>
                 <p className='text-lg text-center'>Users are allowed to create their own events on the platform, by visiting - Create an NFT Event - page.
