@@ -34,7 +34,11 @@ NFTick.io is a project submission for polygon BUIDL Hackathon
 
 # SPONSOR Technology
 POLYGON (mumbai testnet): for fast and efficient platform transactions
+
+
 IPFS: for NFTick data storage 
+
+
 AWS: for App deployment
 
 smart contract address: 0x6D0E69f33364E60c2459576d57195dBD9acE7aD5
