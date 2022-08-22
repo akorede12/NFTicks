@@ -29,7 +29,7 @@ export default function Home() {
                     Polygon POS allows for fast and inexpensive transaction on the blockchain, without which NFTick.io won't be able to function.
                 </p>
                 <h2 className='text-lg text-center font-bold'>For Event Creators</h2>
-                <p className='text-lg text-center'>Users are allowed to create their own events on the platform, by visiting "Create an NFT Event" page.
+                <p className='text-lg text-center'>Users are allowed to create their own events on the platform, by visiting - Create an NFT Event - page.
                     The user is asked to provide necessary information about the event like the; Event name, event description, price of tickets, total number of tickets  etc.
                     after which the user will be asked to pay the Event listing price, and create the event
                 </p>
