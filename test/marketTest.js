@@ -36,15 +36,6 @@ describe("NFTick contract", function () {
         expect(await NFTickContract.getListingPrice()).to.equal(2000);
     })
     it("should call the createNFTick function and emit an event", async function () {
-        /*
-        uint256[] memory tokenIds,
-        uint256[] memory amounts,
-        bytes memory _data,
-        uint256 price,
-        uint256 _totalTokens,
-        bytes memory _tokenName
-        */
-
         // get contract object from fixture 
         const { NFTickContract, owner } = await loadFixture(deployContractFixture);
 
