@@ -69,9 +69,10 @@ export default function CreateItem() {
         const amounts = ethers.utils.parseUnits(formInput.amounts)
         const price = ethers.utils.parseUnits(formInput.price, 'ether')
         let nftickContract = new ethers.Contract(contractAddress, NFTick.abi, signer)
-        let listingPrice = await contract.getListingPrice()
+        let listingPrice = await nftickContract.getListingPrice()
         listingPrice = listingPrice.toString()
-        let transaction = await contract.createNFTick(
+        // url = ethers.utils.formatBytes32String(url)
+        let transaction = await nftickContract.createNFTick(
             tokenIds,
             amounts,
             url,
