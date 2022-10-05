@@ -11,6 +11,10 @@ import { chain, configureChains, createClient, WagmiConfig } from 'wagmi';
 
 import { publicProvider } from 'wagmi/providers/public';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
+import "react-multi-carousel/lib/styles.css";
+import { store } from '../frontend/utils/reduxToolkit/store'
+import { Provider } from 'react-redux'
+import DisplayModals from '../frontend/components/commons/displayModal';
 
 
 const { chains, provider } = configureChains(
@@ -36,7 +40,10 @@ function MyApp({ Component, pageProps }) {
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains}>
-        <Component {...pageProps} />
+        <Provider store={store}>
+          <Component {...pageProps} />
+          <DisplayModals />
+        </Provider>
       </RainbowKitProvider>
     </WagmiConfig>
   )
